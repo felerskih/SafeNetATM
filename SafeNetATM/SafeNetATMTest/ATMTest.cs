@@ -514,7 +514,7 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[6];
             int[] acCounts = new int[6];
-            string[] toRetrieve = ["$100", "$50", "$20", "$10", "$5", "$1"];
+            string[] toRetrieve = new string[6] { "$100", "$50", "$20", "$10", "$5", "$1" };
 
             atm.Withdraw(50);
             atm.Withdraw(20);
@@ -545,7 +545,7 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[5];
             int[] acCounts = new int[5];
-            string[] toRetrieve = ["$50", "$20", "$10", "$5", "$1"];
+            string[] toRetrieve = new string[5] { "$50", "$20", "$10", "$5", "$1" };
 
             atm.Withdraw(50);
             atm.Withdraw(20);
@@ -576,7 +576,7 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[4];
             int[] acCounts = new int[4];
-            string[] toRetrieve = ["$20", "$10", "$5", "$1"];
+            string[] toRetrieve = new string[4] { "$20", "$10", "$5", "$1" };
 
             atm.Withdraw(20);
             atm.Withdraw(20);
@@ -606,7 +606,7 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[3];
             int[] acCounts = new int[3];
-            string[] toRetrieve = ["$10", "$5", "$1"];
+            string[] toRetrieve = new string[3] { "$10", "$5", "$1" };
 
             atm.Withdraw(10);
             atm.Withdraw(10);
@@ -634,7 +634,7 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[2];
             int[] acCounts = new int[2];
-            string[] toRetrieve = ["$5", "$1"];
+            string[] toRetrieve = new string[2] { "$5", "$1" };
 
             atm.Withdraw(5);
             atm.Withdraw(5);
@@ -659,7 +659,7 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[1];
             int[] acCounts = new int[1];
-            string[] toRetrieve = ["$1"];
+            string[] toRetrieve = new string[1] { "$1" };
 
             atm.Withdraw(1);
             atm.Withdraw(1);
