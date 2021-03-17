@@ -38,14 +38,29 @@ namespace SafeNetATM
         public int[] Withdraw(int amt)
         {
             int[] tempCounts = cannisters;
+            int canAmt;
 
-            while (amt > 0 && tempCounts[0] != -1) //Haven't fulfilled
-            {                                      //the transaction, and
-                if (amt > 100 && tempCounts[0] > 0)//haven't rejected the
-                {                                  //transaction
-                    tempCounts[0]
+            while (amt > 0 && tempCounts[0] != -1)
+            {   //Haven't fulfilled or rejected transation
+                for (int i = 0; i < tempCounts.Length; i++)
+                {
+                    canAmt = 100 - 50 * (i / 1) - 30 * (i / 2) 
+                             - 10 * (i / 3) - 5 * (i / 4) - 4 * (i / 5);
+                    if (tempCounts[i] != 0 && amt > canAmt)
+                    {
+                        tempCounts[i]--;
+                        amt -= canAmt;
+                        i = tempCounts.Length;
+                    }
+                    else if (i == tempCounts.Length - 1)
+                    {
+                        tempCounts = new int[6];
+                        tempCounts[0] = -1;
+                    }
                 }
             }
+            if (tempCounts[0] != -1)
+                cannisters = tempCounts;
             return tempCounts;
         }
 
@@ -54,13 +69,40 @@ namespace SafeNetATM
         //order.
         public int[] GetCounts(string[] bills)
         {
+            int[] retCans = new int[bills.Length];
 
+            if (retCans.Length == cannisters.Length)
+                return GetAllCounts();
+
+            for (int i = 0; i < bills.Length; i++)
+            {
+                if (bills[i][1] == '1')
+                {
+                    if (bills[i].Length == 4)
+                        retCans[i] = cannisters[0];
+                    if (bills[i].Length == 3)
+                        retCans[i] = cannisters[3];
+                    if (bills[i].Length == 2)
+                        retCans[i] = cannisters[5];
+                }
+                else if (bills[i][1] == '5')
+                {
+                    if (bills[i].Length == 3)
+                        retCans[i] = cannisters[1];
+                    if (bills[i].Length == 2)
+                        retCans[i] = cannisters[4];
+                }
+                else if (bills[i][1] == '2')
+                    retCans[i] = cannisters[2];
+            }
+
+            return retCans;
         }
 
         //Returns all Cannister counts.
         public int[] GetAllCounts()
         {
-
+            return cannisters;
         }
     }
 }
