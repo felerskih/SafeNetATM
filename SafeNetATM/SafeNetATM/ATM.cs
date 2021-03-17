@@ -38,29 +38,51 @@ namespace SafeNetATM
         public int[] Withdraw(int amt)
         {
             int[] tempCounts = cannisters;
-            int canAmt;
+            int i = 0;
 
             while (amt > 0 && tempCounts[0] != -1)
             {   //Haven't fulfilled or rejected transation
-                for (int i = 0; i < tempCounts.Length; i++)
+                if (tempCounts[i] != 0 && amt >= 100)
                 {
-                    canAmt = 100 - 50 * (i / 1) - 30 * (i / 2) 
-                             - 10 * (i / 3) - 5 * (i / 4) - 4 * (i / 5);
-                    if (tempCounts[i] != 0 && amt > canAmt)
-                    {
-                        tempCounts[i]--;
-                        amt -= canAmt;
-                        i = tempCounts.Length;
-                    }
-                    else if (i == tempCounts.Length - 1)
-                    {
-                        tempCounts = new int[6];
-                        tempCounts[0] = -1;
-                    }
+                    tempCounts[i]--;
+                    amt -= 100;
                 }
+                else if (tempCounts[++i] != 0 && amt >= 50)
+                {
+                    tempCounts[i]--;
+                    amt -= 50;
+                }
+                else if (tempCounts[++i] != 0 && amt >= 20)
+                {
+                    tempCounts[i]--;
+                    amt -= 20;
+                }
+                else if (tempCounts[++i] != 0 && amt >= 10)
+                {
+                    tempCounts[i]--;
+                    amt -= 10;
+                }
+                else if (tempCounts[++i] != 0 && amt >= 5)
+                {
+                    tempCounts[i]--;
+                    amt -= 5;
+                }
+                else if (tempCounts[++i] != 0 && amt >= 1)
+                {
+                    tempCounts[i]--;
+                    amt -= 1;
+                }
+                else
+                {
+                    tempCounts = new int[6];
+                    tempCounts[0] = -1;
+                }
+                i = 0;
             }
+
             if (tempCounts[0] != -1)
                 cannisters = tempCounts;
+
             return tempCounts;
         }
 

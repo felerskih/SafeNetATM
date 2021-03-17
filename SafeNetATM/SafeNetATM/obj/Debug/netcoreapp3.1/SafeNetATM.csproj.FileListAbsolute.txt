@@ -1,0 +1,11 @@
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\bin\Debug\netcoreapp3.1\SafeNetATM.exe
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\bin\Debug\netcoreapp3.1\SafeNetATM.deps.json
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\bin\Debug\netcoreapp3.1\SafeNetATM.runtimeconfig.json
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\bin\Debug\netcoreapp3.1\SafeNetATM.runtimeconfig.dev.json
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\bin\Debug\netcoreapp3.1\SafeNetATM.dll
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\bin\Debug\netcoreapp3.1\SafeNetATM.pdb
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\obj\Debug\netcoreapp3.1\SafeNetATM.csprojAssemblyReference.cache
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\obj\Debug\netcoreapp3.1\SafeNetATM.AssemblyInfoInputs.cache
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\obj\Debug\netcoreapp3.1\SafeNetATM.AssemblyInfo.cs
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\obj\Debug\netcoreapp3.1\SafeNetATM.dll
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATM\obj\Debug\netcoreapp3.1\SafeNetATM.pdb

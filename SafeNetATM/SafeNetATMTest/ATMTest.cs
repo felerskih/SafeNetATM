@@ -17,7 +17,8 @@ namespace SafeNetATMTest
             int[] exCounts = new int[6];
             for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10;
-            Assert.AreEqual(exCounts, atm.GetAllCounts());
+            int[] acCounts = atm.GetAllCounts();
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //Test Cases for Withdraw
@@ -62,10 +63,10 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(101);
             exCounts[0] = 9;
             exCounts[5] = 9;
-            for (int i = 0; i < exCounts.Length - 1; i++)
+            for (int i = 1; i < exCounts.Length - 1; i++)
                 exCounts[i] = 10;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //2.  Withdrawal equal to $100
@@ -82,7 +83,7 @@ namespace SafeNetATMTest
             for (int i = 1; i < exCounts.Length; i++)
                 exCounts[i] = 10;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //3.  Withdrawal greater than $50, less than $100
@@ -96,9 +97,11 @@ namespace SafeNetATMTest
 
             acCounts = atm.Withdraw(51);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[i] = 10 - (i / 1) + (i / 2) - (i / 5);
+                exCounts[i] = 10;
+            exCounts[1] = 9;
+            exCounts[5] = 9;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //4.  Withdrawal equal to $50
@@ -112,9 +115,10 @@ namespace SafeNetATMTest
 
             acCounts = atm.Withdraw(50);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[i] = 10 - (i / 1) + (i / 2);
+                exCounts[i] = 10;
+            exCounts[1] = 9;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //5.  Withdrawal greater than $20, less than 50$
@@ -127,10 +131,10 @@ namespace SafeNetATMTest
             int[] acCounts = new int[6];
 
             acCounts = atm.Withdraw(21);
-            for (int i = 0; i < exCounts.Length - 1; i++)
-                exCounts[i] = 10 - (i / 2) + (i / 3) - (i / 5);
+            for (int i = 0; i < exCounts.Length; i++)
+                exCounts[i] = 10 - (i / 2) + (i / 3) + (i / 4) - (i / 5);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //6.  Withdrawal equal to $20
@@ -144,9 +148,9 @@ namespace SafeNetATMTest
 
             acCounts = atm.Withdraw(20);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[i] = 10 - (i / 2) + (i / 3);
+                exCounts[i] = 10 - (i / 2) + (i / 3) + (i / 4);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //7.  Withdrawal greater than $10, less than $20
@@ -159,10 +163,10 @@ namespace SafeNetATMTest
             int[] acCounts = new int[6];
 
             acCounts = atm.Withdraw(11);
-            for (int i = 0; i < exCounts.Length - 1; i++)
+            for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10 - (i / 3) + (i / 4) - (i / 5);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //8.  Withdrawal equal to $10
@@ -178,7 +182,7 @@ namespace SafeNetATMTest
             for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10 - (i / 3) + (i / 4);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //9.  Withdrawal greater than $5, less than $10
@@ -194,7 +198,7 @@ namespace SafeNetATMTest
             for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10 - (i/4);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
         //10. Withdrawal equal to $5
         //Should be 9 bills in the 5s cannister, 10 in the rest
@@ -209,7 +213,7 @@ namespace SafeNetATMTest
             for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10 - (i / 4) + (i / 5);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //11. Withdrawal greater than $1, less than $5
@@ -225,7 +229,7 @@ namespace SafeNetATMTest
             for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10 - (2 * (i / 5));
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //12. Withdrawal equal to $1
@@ -241,7 +245,7 @@ namespace SafeNetATMTest
             for (int i = 0; i < exCounts.Length; i++)
                 exCounts[i] = 10 - (i / 5);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //13. Withdrawal with no money in the ATM
@@ -257,7 +261,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(50);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //14. Withdrawal of small amount not possible due to not enough small bills
@@ -268,12 +272,15 @@ namespace SafeNetATMTest
             ATM atm = new ATM();
             int[] exCounts = new int[6];
             int[] acCounts = new int[6];
-
-            atm.Withdraw(55);
+            for (int i = 0; i < 10; i++)
+            {
+                atm.Withdraw(5);
+                atm.Withdraw(1);
+            }
             acCounts = atm.Withdraw(6);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //15. Withdrawal of $100, but no $100s
@@ -288,15 +295,15 @@ namespace SafeNetATMTest
             atm.Withdraw(1000);
             acCounts = atm.Withdraw(100);
             exCounts[0] = 0;
-            acCounts[1] = 8;
+            exCounts[1] = 8;
             for (int i = 2; i < exCounts.Length; i++)
                 exCounts[i] = 10;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //16. Withdrawal of $50, but no $50s
-        //Should be 0 bills in 50s, 8 in 20s, 9 in 5s, 10 in the rest
+        //Should be 0 bills in 50s, 8 in 20s, 9 in 10s, 10 in the rest
         [TestMethod]
         public void TestWithdrawNoFifty()
         {
@@ -310,9 +317,9 @@ namespace SafeNetATMTest
             exCounts[1] = 0;
             exCounts[2] = 8;
             for (int i = 3; i < exCounts.Length; i++)
-                exCounts[i] = 10 - (i / 4) + (i + 5);
+                exCounts[i] = 10 - (i / 3) + (i / 4);
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //17. Withdrawal of $20, but no $20s
@@ -332,9 +339,9 @@ namespace SafeNetATMTest
             exCounts[2] = 0;
             exCounts[3] = 8;
             for (int i = 4; i < exCounts.Length; i++)
-                exCounts[i] = 10 - (i / 4) + (i + 5);
+                exCounts[i] = 10;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //18. Withdrawal of $10, but no $10s
@@ -356,7 +363,7 @@ namespace SafeNetATMTest
             exCounts[4] = 8;
             exCounts[5] = 10;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //19. Withdrawal of $5, but no $5s
@@ -378,7 +385,7 @@ namespace SafeNetATMTest
             exCounts[4] = 0;
             exCounts[5] = 5;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //20. Withdrawal of $100, no $10, $20, $50, $100
@@ -394,7 +401,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(100);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //21. Withdrawal of $50, no $5, $10, $20, $50
@@ -416,7 +423,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(50);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //22. Withdrawal of $20, no $5, $10, $20
@@ -437,7 +444,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(20);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //23. Withdrawal of $10, no $1, $5, $10
@@ -458,7 +465,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(10);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //24. Withdrawal of $5, no $1, $5
@@ -478,7 +485,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(5);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //25. withdrawal of $1, no $1
@@ -495,7 +502,7 @@ namespace SafeNetATMTest
             acCounts = atm.Withdraw(1);
             exCounts[0] = -1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //Test Cases for GetCounts
@@ -509,7 +516,7 @@ namespace SafeNetATMTest
 
         //1. Get All counts, in order
         [TestMethod]
-        public void TestGetCountsNoAll()
+        public void TestGetCountsAll()
         {
             ATM atm = new ATM();
             int[] exCounts = new int[6];
@@ -533,9 +540,9 @@ namespace SafeNetATMTest
             atm.Withdraw(1);
             acCounts = atm.GetCounts(toRetrieve);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[1] = 10 - i;
+                exCounts[i] = 10 - i;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //2. Get 5 counts, in order
@@ -564,9 +571,9 @@ namespace SafeNetATMTest
             atm.Withdraw(1);
             acCounts = atm.GetCounts(toRetrieve);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[1] = 10 - i - 1;
+                exCounts[i] = 10 - i - 1;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //3. Get 4 counts, in order
@@ -594,9 +601,9 @@ namespace SafeNetATMTest
             atm.Withdraw(1);
             acCounts = atm.GetCounts(toRetrieve);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[1] = 10 - i - 2;
+                exCounts[i] = 10 - i - 2;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //4. Get 3 counts, in order
@@ -622,9 +629,9 @@ namespace SafeNetATMTest
             atm.Withdraw(1);
             acCounts = atm.GetCounts(toRetrieve);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[1] = 10 - i - 3;
+                exCounts[i] = 10 - i - 3;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //5. Get 2 counts, in order
@@ -647,9 +654,9 @@ namespace SafeNetATMTest
             atm.Withdraw(1);
             acCounts = atm.GetCounts(toRetrieve);
             for (int i = 0; i < exCounts.Length; i++)
-                exCounts[1] = 10 - i - 4;
+                exCounts[i] = 10 - i - 4;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
 
         //6. Get 1 count
@@ -667,10 +674,9 @@ namespace SafeNetATMTest
             atm.Withdraw(1);
             atm.Withdraw(1);
             acCounts = atm.GetCounts(toRetrieve);
-            for (int i = 0; i < exCounts.Length; i++)
-                exCounts[1] = 10 - i - 5;
+            exCounts[0] = 5;
 
-            Assert.AreEqual(exCounts, acCounts);
+            CollectionAssert.AreEqual(exCounts, acCounts);
         }
     }
 }
