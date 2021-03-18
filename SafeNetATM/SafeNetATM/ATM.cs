@@ -7,7 +7,7 @@ namespace SafeNetATM
     //This class defines an ATM. It is the core backend processing of
     //the program. It keeps track of the cannister (or bill) counts
     //in descending order from 100s to 1s (see comment above 
-    //cannisters[] definition0, which is the classes only data member.
+    //cannisters[] definition, which is the classes only data member.
     //ATM has a constructor, a method to handle withdrawals, a method
     //to handle supplies inquiries, and a method to return the count of
     //all bill counts (This one was needed to implement testing 
