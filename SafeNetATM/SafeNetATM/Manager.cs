@@ -27,7 +27,33 @@ namespace SafeNetATM
         //returns the error string in the 0th index.
         public string[] MakeWithdrawal(string strAmt)
         {
+            int amt;
+            string[] canCounts = new string[6];
+            int[] returnedCounts = new int[6];
 
+            try
+            {
+                amt = Convert.ToInt32(strAmt);
+                if (amt < 0)
+                    throw new ArgumentException();
+                returnedCounts = atm.Withdraw(amt);
+                if (returnedCounts[0] == -1)
+                    canCounts[0] = InvalidAmt;
+                else
+                {
+                    for (int i = 0; i < returnedCounts.Length; i++)
+                        canCounts[i] = Convert.ToString(returnedCounts[i]);
+                }
+            }
+            catch (Exception ex)
+            {//Handle expected Exceptions, throw on the rest
+                if (ex is InvalidCastException 
+                    || ex is ArgumentException)
+                    canCounts[0] = InvalidCmd;
+                throw;
+            }
+
+            return canCounts;
         }
 
         //Parses and validates the command paramaters. If so, returns
@@ -35,19 +61,55 @@ namespace SafeNetATM
         //string in the 0th index.
         public string[] InquireCannisters(string inquiry)
         {
+            bool isIn = false;
+            string[] toPass;
+            string[] canCounts;
+            int[] returnedCounts;
 
+            toPass = inquiry.Split(' ');
+
+            canCounts = new string[toPass.Length];
+            returnedCounts = new int[toPass.Length];
+
+            for (int i = 0; i < toPass.Length; i++)
+            {
+                for (int j = 0; j < cansList.Length; j++)
+                {
+                    if (toPass[i] == cansList[j])
+                        isIn = true;
+                }
+                if (isIn == false)
+                {
+                    canCounts[0] = InvalidCmd;
+                    return canCounts;
+                }
+                isIn = false;
+            }
+
+            returnedCounts = atm.GetCounts(toPass);
+            for (int i = 0; i < returnedCounts.Length; i++)
+                canCounts[i] = Convert.ToString(returnedCounts[i]);
+
+            return canCounts;
         }
 
         //Calls the ATM to restock. Returns all cannister counts.
         public string[] Restock()
         {
+            string[] canCounts = new string[6];
+            int[] returnedCounts = new int[6];
 
+            atm = new ATM();
+            returnedCounts = atm.GetAllCounts();
+            for (int i = 0; i < returnedCounts.Length; i++)
+                canCounts[i] = Convert.ToString(returnedCounts[i]);
+            return canCounts;
         }
 
         //Returns the Invalid Command error message.
         public string InvalidCommand()
         {
-            
+            return InvalidCmd;
         }
     }
 }
