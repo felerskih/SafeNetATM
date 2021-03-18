@@ -47,10 +47,11 @@ namespace SafeNetATM
             }
             catch (Exception ex)
             {//Handle expected Exceptions, throw on the rest
-                if (ex is InvalidCastException 
+                if (ex is FormatException 
                     || ex is ArgumentException)
                     canCounts[0] = InvalidCmd;
-                throw;
+                else
+                    throw;
             }
 
             return canCounts;
@@ -59,17 +60,18 @@ namespace SafeNetATM
         //Parses and validates the command paramaters. If so, returns
         //the requested cannister counts. Otherwise, returns the error
         //string in the 0th index.
-        public string[] InquireCannisters(string inquiry)
+        public string[] ParseCanisters(string inquiry)
         {
             bool isIn = false;
             string[] toPass;
-            string[] canCounts;
-            int[] returnedCounts;
-
             toPass = inquiry.Split(' ');
 
-            canCounts = new string[toPass.Length];
-            returnedCounts = new int[toPass.Length];
+            if (toPass.Length > 6)
+            {
+                toPass = new string[1];
+                toPass[0] = InvalidCmd;
+                return toPass;
+            }
 
             for (int i = 0; i < toPass.Length; i++)
             {
@@ -80,11 +82,25 @@ namespace SafeNetATM
                 }
                 if (isIn == false)
                 {
-                    canCounts[0] = InvalidCmd;
-                    return canCounts;
+                    toPass = new string[1];
+                    toPass[0] = InvalidCmd;
+                    return toPass;
                 }
                 isIn = false;
             }
+
+            return toPass;
+        }
+        
+        //Processes the params of the Inquiry command. Returns the
+        //desired canister counts.
+        public string[] InquireCanisters(string[] toPass)
+        {
+            string[] canCounts;
+            int[] returnedCounts;
+
+            canCounts = new string[toPass.Length];
+            returnedCounts = new int[toPass.Length];
 
             returnedCounts = atm.GetCounts(toPass);
             for (int i = 0; i < returnedCounts.Length; i++)

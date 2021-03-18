@@ -93,3 +93,5 @@ C:\Projects\SafeNetATM\SafeNetATM\SafeNetATMTest\obj\Debug\netcoreapp3.1\SafeNet
 C:\Projects\SafeNetATM\SafeNetATM\SafeNetATMTest\obj\Debug\netcoreapp3.1\SafeNetATMTest.csproj.CopyComplete
 C:\Projects\SafeNetATM\SafeNetATM\SafeNetATMTest\obj\Debug\netcoreapp3.1\SafeNetATMTest.dll
 C:\Projects\SafeNetATM\SafeNetATM\SafeNetATMTest\obj\Debug\netcoreapp3.1\SafeNetATMTest.pdb
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATMTest\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.AdapterUtilities.dll
+C:\Projects\SafeNetATM\SafeNetATM\SafeNetATMTest\bin\Debug\netcoreapp3.1\testhost.exe
