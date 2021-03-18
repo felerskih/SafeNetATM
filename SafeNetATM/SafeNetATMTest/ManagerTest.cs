@@ -61,7 +61,14 @@ namespace SafeNetATMTest
         [TestMethod]
         public void TestInquireCannistersSuccess()
         {
+            Manager man = new Manager();
+            string[] actual = new string[1];
+            string[] expected = new string[1];
 
+            actual = man.InquireCannisters("$20");
+            expected[0] = "10";
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
