@@ -30,6 +30,7 @@ namespace SafeNetATM
             string cmd;
             string[] parms;
             string[] canAmounts;
+            string check;
 
             cmd = Console.ReadLine();
             cmd = cmd.ToUpper();
@@ -47,13 +48,17 @@ namespace SafeNetATM
                     cmd = cmd.Remove(0, 2);
 
                     parms = man.ParseCannisters(cmd);
-                    if (parms[0] != failed)
+                    try
                     {
+                        check = parms[0].Substring(1, parms[0].Length - 1);
+                        Convert.ToInt32(check);
                         canAmounts = man.InquireCannisters(parms);
                         OutputCans(parms, canAmounts);
                     }
-                    else
-                        Console.WriteLine(man.InvalidCommand());
+                    catch (FormatException)
+                    {
+                        Console.WriteLine(parms[0]);
+                    }
                 }
                 else if (cmd[0] == restock)
                 {

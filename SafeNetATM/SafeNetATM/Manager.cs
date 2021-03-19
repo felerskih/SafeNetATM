@@ -14,6 +14,7 @@ namespace SafeNetATM
         private readonly string[] cansList = { "$100", "$50", "$20", "$10", "$5", "$1" };
         private readonly string InvalidAmt = "Failure: Insufficient Funds";
         private readonly string InvalidCmd = "Failure: Invalid Command";
+        private readonly string failed = "F";
         private ATM atm;
 
         //Constructs an ATM object
@@ -60,7 +61,7 @@ namespace SafeNetATM
         //Parses and validates the command paramaters. If so, returns
         //the requested cannister counts. Otherwise, returns the error
         //string in the 0th index.
-        public string[] ParseCanisters(string inquiry)
+        public string[] ParseCannisters(string inquiry)
         {
             bool isIn = false;
             string[] toPass;
@@ -94,7 +95,7 @@ namespace SafeNetATM
         
         //Processes the params of the Inquiry command. Returns the
         //desired canister counts.
-        public string[] InquireCanisters(string[] toPass)
+        public string[] InquireCannisters(string[] toPass)
         {
             string[] canCounts;
             int[] returnedCounts;

@@ -6,7 +6,8 @@ namespace SafeNetATM
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConsoleIO io = new ConsoleIO();
+            io.Run();
         }
     }
 }
