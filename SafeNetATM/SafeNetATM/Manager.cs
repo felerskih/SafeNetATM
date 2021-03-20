@@ -14,7 +14,6 @@ namespace SafeNetATM
         private readonly string[] cansList = { "$100", "$50", "$20", "$10", "$5", "$1" };
         private readonly string InvalidAmt = "Failure: Insufficient Funds";
         private readonly string InvalidCmd = "Failure: Invalid Command";
-        private readonly string failed = "F";
         private ATM atm;
 
         //Constructs an ATM object

@@ -12,7 +12,6 @@ namespace SafeNetATM
         private readonly char inquire = 'I';
         private readonly char restock = 'R';
         private readonly char quit = 'Q';
-        private readonly string failed = "F";
         private readonly string[] cansList = { "$100", "$50", "$20", "$10", "$5", "$1" };
 
 
@@ -38,27 +37,37 @@ namespace SafeNetATM
             {
                 if (cmd[0] == withdraw)
                 {
-                    cmd = cmd.Remove(0, 2);
+                    try
+                    {
+                        cmd = cmd.Remove(0, 2);
 
-                    canAmounts = man.MakeWithdrawal(cmd);
-                    OutputAllCans(canAmounts);
+                        canAmounts = man.MakeWithdrawal(cmd);
+                        OutputAllCans(canAmounts);
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine(man.InvalidCommand());
+                    }
                 }
                 else if (cmd[0] == inquire)
                 {
-                    cmd = cmd.Remove(0, 2);
-
-                    parms = man.ParseCannisters(cmd);
                     try
                     {
+                        cmd = cmd.Remove(0, 2);
+
+                        parms = man.ParseCannisters(cmd);
+
                         check = parms[0].Substring(1, parms[0].Length - 1);
                         Convert.ToInt32(check);
                         canAmounts = man.InquireCannisters(parms);
                         OutputCans(parms, canAmounts);
                     }
-                    catch (FormatException)
+                    catch (Exception e)
                     {
-                        Console.WriteLine(parms[0]);
+                        if( e is FormatException || e is ArgumentOutOfRangeException)
+                            Console.WriteLine(man.InvalidCommand());
                     }
+
                 }
                 else if (cmd[0] == restock)
                 {
