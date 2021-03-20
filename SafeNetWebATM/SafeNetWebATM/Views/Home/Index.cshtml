@@ -1,0 +1,89 @@
+﻿<!--
+    Makes up the single page client of the project. Uses three separate
+    forms to send data on  to the HomeController.
+    Author: Henry Felerski
+-->
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div class="row">
+        <div class="col-5">
+            @using (Html.BeginForm("Withdraw", "Home", FormMethod.Get))
+            {
+                <p>
+                    Amt: $@Html.TextBox("Amt")
+                    <input class="btn-primary" type="submit" value="Withdraw" />
+                </p>
+            }
+        </div>
+        <div class="col">
+            @using (Html.BeginForm("Inquire", "Home", FormMethod.Get))
+            {
+                <p>
+                    @Html.CheckBox("hundred", false)$100 
+                    @Html.CheckBox("fifty", false)$50 
+                    @Html.CheckBox("twenty", false)$20 
+                    @Html.CheckBox("ten", false)$10 
+                    @Html.CheckBox("five", false)$5 
+                    @Html.CheckBox("one", false)$1 
+                    <input class="btn-primary" type="submit" value="Inquire" />
+                </p>
+            }
+        </div>
+        <div class="col-2">
+            @using (Html.BeginForm("Restock", "Home", FormMethod.Get))
+            {
+                <p>
+                    <input class="btn-primary" type="submit" value="Restock" />
+                </p>
+            }
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Cannister</th>
+                <th scope="col">Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>$100</td>
+                <td id="tdHundred">@ViewBag.hundred</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>$50</td>
+                <td id="tdTwenty">@ViewBag.fifty</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>$20</td>
+                <td id="tdTen">@ViewBag.twenty</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>$10</td>
+                <td id="tdFive">@ViewBag.ten</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>$5</td>
+                <td id="tdOne">@ViewBag.five</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+                <td>$1</td>
+                <td id="tdOne">@ViewBag.One</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

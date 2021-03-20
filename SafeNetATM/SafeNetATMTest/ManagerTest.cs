@@ -85,6 +85,19 @@ namespace SafeNetATMTest
         }
 
         [TestMethod]
+        public void TestParseCannistersBool()
+        {
+            Manager man = new Manager();
+            bool[] parms = { false, false, true, true, false, false };
+            string[] actual = new string[2];
+            string[] expected = { "$20", "$10" };
+
+            actual = man.ParseCannisters("$20 $10");
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void TestParseCannistersFailure()
         {
             Manager man = new Manager();

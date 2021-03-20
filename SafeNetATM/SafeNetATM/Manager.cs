@@ -57,6 +57,29 @@ namespace SafeNetATM
             return canCounts;
         }
 
+        //Parse and validate list of cannisters in boolean form from the
+        //Web client.
+        public string[] ParseCannisters(bool[] cans)
+        {
+            int count = 0;
+            string[] cansRet;
+            for (int i = 0; i < cans.Length; i++)
+            {
+                if (cans[i])
+                    count++;
+            }
+
+            cansRet = new string[count];
+            count = 0;
+            for (int i = 0; i < cans.Length; i++)
+            {
+                if (cans[i])
+                    cansRet[count++] = cansList[i];
+            }
+
+            return cansRet;
+        }
+
         //Parses and validates the command paramaters. If so, returns
         //the requested cannister counts. Otherwise, returns the error
         //string in the 0th index.
