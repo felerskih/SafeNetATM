@@ -74,13 +74,20 @@ namespace SafeNetWebATM.Controllers
 
         private void DisplayAllCounts(string[] canCounts)
         {
-            //Alert if canCounts returns error
-            ViewBag.hundred = canCounts[0];
-            ViewBag.fifty = canCounts[1];
-            ViewBag.twenty = canCounts[2];
-            ViewBag.ten = canCounts[3];
-            ViewBag.five = canCounts[4];
-            ViewBag.one = canCounts[5];
+            try
+            {
+                Convert.ToInt32(canCounts[0]);
+                ViewBag.hundred = canCounts[0];
+                ViewBag.fifty = canCounts[1];
+                ViewBag.twenty = canCounts[2];
+                ViewBag.ten = canCounts[3];
+                ViewBag.five = canCounts[4];
+                ViewBag.one = canCounts[5];
+            }
+            catch (FormatException)
+            {
+                ViewBag.alert = canCounts[0];
+            }
         }
 
         private void DisplayCounts(bool[] parms, string[] canCounts)

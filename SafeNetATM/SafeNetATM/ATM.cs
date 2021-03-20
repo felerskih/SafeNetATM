@@ -37,9 +37,11 @@ namespace SafeNetATM
         //ammounts.
         public int[] Withdraw(int amt)
         {
-            int[] tempCounts = cannisters;
+            int[] tempCounts = new int[cannisters.Length];
             int i = 0;
 
+            for (int j = 0; j < tempCounts.Length; j++)
+                tempCounts[j] = cannisters[j];
             while (amt > 0 && tempCounts[0] != -1)
             {   //Haven't fulfilled or rejected transation
                 if (tempCounts[i] != 0 && amt >= 100)
